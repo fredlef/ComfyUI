@@ -1,0 +1,106 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Text Input",
+      "properties": {
+        "text": "a highly detailed portrait of a cyberpunk cat, glowing eyes, neon city background"
+      }
+    },
+    {
+      "id": 2,
+      "type": "Text Input",
+      "properties": {
+        "text": "blurry, low quality, poorly drawn, worst quality"
+      }
+    },
+    {
+      "id": 11,
+      "type": "Checkpoint Loader",
+      "properties": {
+        "ckpt_name": "HiDreamV1.5_Turbo.safetensors"
+      }
+    },
+    {
+      "id": 12,
+      "type": "CLIP Loader",
+      "inputs": {
+        "checkpoint": 11
+      }
+    },
+    {
+      "id": 3,
+      "type": "Load LoRA",
+      "inputs": {
+        "model": 11,
+        "clip": 12
+      },
+      "properties": {
+        "path": "loras/cyberpunk_cat_lora.safetensors",
+        "strength_model": 0.6,
+        "strength_clip": 0.6
+      }
+    },
+    {
+      "id": 5,
+      "type": "Clip Text Encode",
+      "inputs": {
+        "text": 1,
+        "clip": 3
+      }
+    },
+    {
+      "id": 6,
+      "type": "Clip Text Encode",
+      "inputs": {
+        "text": 2,
+        "clip": 3
+      }
+    },
+    {
+      "id": 7,
+      "type": "Empty Latent Image",
+      "properties": {
+        "width": 768,
+        "height": 768,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "inputs": {
+        "model": 3,
+        "positive": 5,
+        "negative": 6,
+        "latent_image": 7
+      },
+      "properties": {
+        "steps": 25,
+        "cfg": 7,
+        "sampler_name": "dpmpp_2m_karras",
+        "scheduler": "normal",
+        "seed": 123456,
+        "denoise": 1.0
+      }
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "inputs": {
+        "samples": 8,
+        "vae": 11
+      }
+    },
+    {
+      "id": 10,
+      "type": "Save Image",
+      "inputs": {
+        "images": 9
+      },
+      "properties": {
+        "filename_prefix": "cyberpunk_cat"
+      }
+    }
+  ]
+}

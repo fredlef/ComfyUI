@@ -1,0 +1,208 @@
+{
+  "last_node_id": 173,
+  "last_link_id": 221,
+  "nodes": [
+    {
+      "id": 168,
+      "type": "PreviewImage",
+      "pos": [
+        850,
+        75
+      ],
+      "size": [
+        778.7380221930398,
+        790.9126362491461
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 221
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage",
+        "ttNbgOverride": {
+          "color": "#232",
+          "bgcolor": "#353",
+          "groupcolor": "#8A8"
+        }
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 173,
+      "type": "ExpressionEditor",
+      "pos": [
+        525,
+        75
+      ],
+      "size": {
+        "0": 315,
+        "1": 690
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "src_image",
+          "type": "IMAGE",
+          "link": 220
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "link": null
+        },
+        {
+          "name": "sample_image",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "add_exp",
+          "type": "EXP_DATA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            221
+          ],
+          "shape": 3
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "save_exp",
+          "type": "EXP_DATA",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpressionEditor"
+      },
+      "widgets_values": [
+        2,
+        1,
+        4.5,
+        -13,
+        10.5,
+        2.5,
+        4,
+        13,
+        84,
+        4.2,
+        4,
+        0.41000000000000003,
+        1,
+        1,
+        "OnlyExpression",
+        1.7
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 169,
+      "type": "LoadImage",
+      "pos": [
+        200,
+        75
+      ],
+      "size": [
+        313.9831346085923,
+        420.66681610306125
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            220
+          ],
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "4xupscale.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      220,
+      169,
+      0,
+      173,
+      0,
+      "IMAGE"
+    ],
+    [
+      221,
+      173,
+      0,
+      168,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Expression Editor",
+      "bounding": [
+        0,
+        0,
+        1925,
+        950
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000158,
+      "offset": [
+        284.2170186971391,
+        378.3145929666473
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

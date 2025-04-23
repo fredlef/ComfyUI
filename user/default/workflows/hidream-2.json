@@ -1,0 +1,256 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 13,
+  "version": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "Text Input",
+      "pos": [100, 100],
+      "size": [400, 100],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": "a highly detailed portrait of a cyberpunk cat, glowing eyes, neon city background"
+      },
+      "widgets_values": [
+        "a highly detailed portrait of a cyberpunk cat, glowing eyes, neon city background"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Text Input",
+      "pos": [100, 250],
+      "size": [400, 100],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": "blurry, low quality, poorly drawn, worst quality"
+      },
+      "widgets_values": [
+        "blurry, low quality, poorly drawn, worst quality"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "Checkpoint Loader",
+      "pos": [100, 400],
+      "size": [300, 120],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "ckpt_name": "HiDreamV1.5_Turbo.safetensors"
+      },
+      "widgets_values": [
+        "HiDreamV1.5_Turbo.safetensors"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Load LoRA",
+      "pos": [450, 400],
+      "size": [300, 150],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "properties": {
+        "path": "loras/cyberpunk_cat_lora.safetensors",
+        "strength_model": 0.6,
+        "strength_clip": 0.6
+      },
+      "widgets_values": [
+        "loras/cyberpunk_cat_lora.safetensors",
+        0.6,
+        0.6
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Clip Text Encode",
+      "pos": [600, 100],
+      "size": [300, 150],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 5
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        }
+      ],
+      "properties": {
+        "clip_skip": 1
+      }
+    },
+    {
+      "id": 6,
+      "type": "Clip Text Encode",
+      "pos": [600, 250],
+      "size": [300, 150],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 7
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 8
+        }
+      ],
+      "properties": {
+        "clip_skip": 1
+      }
+    },
+    {
+      "id": 7,
+      "type": "Empty Latent Image",
+      "pos": [600, 550],
+      "size": [300, 120],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "width": 768,
+        "height": 768,
+        "batch_size": 1
+      },
+      "widgets_values": [
+        768,
+        768,
+        1
+      ]
+    },
+    {
+      "id": 8,
+      "type": "KSampler",
+      "pos": [900, 300],
+      "size": [400, 450],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 10
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 12
+        }
+      ],
+      "properties": {
+        "steps": 25,
+        "cfg": 7,
+        "sampler_name": "dpmpp_2m_karras",
+        "scheduler": "normal",
+        "seed": 123456,
+        "denoise": 1.0
+      },
+      "widgets_values": [
+        123456,
+        "dpmpp_2m_karras",
+        25,
+        7,
+        "normal",
+        1.0
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [1350, 300],
+      "size": [300, 100],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 14
+        }
+      ],
+      "properties": {}
+    },
+    {
+      "id": 10,
+      "type": "Save Image",
+      "pos": [1700, 300],
+      "size": [300, 100],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 15
+        }
+      ],
+      "properties": {
+        "filename_prefix": "cyberpunk_cat"
+      },
+      "widgets_values": [
+        "cyberpunk_cat"
+      ]
+    }
+  ],
+  "links": [
+    [3, 11, 0, 3, 0, "MODEL"],
+    [4, 11, 1, 3, 1, "CLIP"],
+    [5, 1, 0, 5, 0, "STRING"],
+    [6, 3, 1, 5, 1, "CLIP"],
+    [7, 2, 0, 6, 0, "STRING"],
+    [8, 3, 1, 6, 1, "CLIP"],
+    [9, 3, 0, 8, 0, "MODEL"],
+    [10, 5, 0, 8, 1, "CONDITIONING"],
+    [11, 6, 0, 8, 2, "CONDITIONING"],
+    [12, 7, 0, 8, 3, "LATENT"],
+    [13, 8, 0, 9, 0, "LATENT"],
+    [14, 11, 2, 9, 1, "VAE"],
+    [15, 9, 0, 10, 0, "IMAGE"]
+  ]
+}

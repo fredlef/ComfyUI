@@ -1,0 +1,3 @@
+unzip "liveportrait" archive. copy to this folder: CmofyUI/models/  
+Install mixlab custum nodes in manager.
+Enjoy! 
