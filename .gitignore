@@ -58,3 +58,40 @@ main.py.bak
 *.frozen.txt
 *.locked.txt
 
+# --- MODELS ---
+models/
+!models/.gitkeep
+
+# --- VENV & CACHE ---
+.venv/
+__pycache__/
+.cache/
+*.pyc
+
+# --- OUTPUTS & TEMP FILES ---
+output/
+output_images/
+output_video/
+output_audio/
+*.log
+*.tmp
+*.bak
+
+# --- LARGE FILE TYPES ---
+*.rar
+*.zip
+*.7z
+*.tar
+*.gz
+*.ckpt
+*.safetensors
+
+# --- SYSTEM/EDITOR FILES ---
+.DS_Store
+Thumbs.db
+.vscode/
+node_modules/
+
+# --- BACKUPS OR PREVIEWS (optional) ---
+backups/
+
