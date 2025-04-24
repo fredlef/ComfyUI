@@ -95,3 +95,5 @@ node_modules/
 # --- BACKUPS OR PREVIEWS (optional) ---
 backups/
 
+#--- ENV ---
+*.env
