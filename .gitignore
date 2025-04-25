@@ -97,3 +97,17 @@ backups/
 
 #--- ENV ---
 *.env
+
+# Ignore AWS credentials and secrets
+.env
+*.env
+aws_credentials
+aws_secrets
+
+# Ignore ComfyUI settings
+settings.json
+
+# ComfyUI sensitive settings
+user/default/comfy.settings.json
+
+
